@@ -65,9 +65,10 @@ function install_wordpress() {
 }
 
 function configure_virtualhost() {
-  sudo sed "s/URL/$URL/g" "/etc/nginx/sites-available/$URL"
+  sudo cp "$PWD/configs/LEMPress-virtualhost.txt" "/etc/nginx/sites-available/$URL"
+  sudo sed -i "s/URL/$URL/g" "/etc/nginx/sites-available/$URL"
   sudo ln -s "/etc/nginx/sites-available/$URL" "/etc/nginx/sites-enabled/$URL"
-  sudo rm "/etc/nginx/sites-enabled/default"
+  # sudo rm "/etc/nginx/sites-enabled/default"
 }
 
 
@@ -94,9 +95,9 @@ install_mysql
 
 install_php
 
-install_varnish
+# install_varnish
 
-install_memcached
+# install_memcached
 
 install_wordpress
 
