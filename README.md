@@ -1,4 +1,4 @@
-**<span style="color: red;">LEMPress is currently being developed and is not ready for use. If you've stubbled across this repository somehow and your interested in using LEMPress, add it to you watch list and check back regularly for the first stable release.</span>**
+**LEMPress is currently being developed and is not ready for use. If you've stubbled across this repository somehow and your interested in using LEMPress, add it to you watch list and check back regularly for the first stable release.**
 
 About LEMPress
 =========
