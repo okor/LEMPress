@@ -16,6 +16,7 @@ time=`date +%s`
 # Configs
 
 tmux_config="$PWD/configs/tmux.conf"
+fastcgi_init="$PWD/configs/fastcgi-init.sh"
 # cat $tmux_config > /new/path/.tmux.conf
 
 # function get_ip() {
@@ -64,6 +65,8 @@ function install_wordpress() {
   mkdir "$HOME/sites/$URL/logs"
 }
 
+
+# Configure
 function configure_virtualhost() {
   sudo cp "$PWD/configs/LEMPress-virtualhost.txt" "/etc/nginx/sites-available/$URL"
   sudo sed -i "s/URL/$URL/g" "/etc/nginx/sites-available/$URL"
@@ -71,8 +74,13 @@ function configure_virtualhost() {
   # sudo rm "/etc/nginx/sites-enabled/default"
 }
 
+function configure_fastcgi() {
+  sudo cp "$fastcgi_init" "/etc/init.d/php-fastcgi"
+}
 
 
+
+# Start
 function start_servers() {
   sudo service nginx reload
   sudo service nginx start
