@@ -33,8 +33,6 @@ function install_tools() {
 }
 
 function install_nginx() {
-  sudo add-apt-repository ppa:nginx/stable
-  sudo apt-get update
   yes | sudo apt-get install nginx
 }
 
@@ -46,14 +44,14 @@ function install_php() {
   yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql
 }
 
-function install_varnish() {
-  yes | sudo apt-get install varnish
-}
+# function install_varnish() {
+#   yes | sudo apt-get install varnish
+# }
 
-function install_memcached() {
-  yes | sudo apt-get install memcached 
-  # php5-memcache
-}
+# function install_memcached() {
+#   yes | sudo apt-get install memcached 
+#   # php5-memcache
+# }
 
 
 function install_wordpress() {
@@ -101,6 +99,8 @@ install_varnish
 install_memcached
 
 install_wordpress
+
+configure_virtualhost
 
 
 
