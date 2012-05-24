@@ -27,3 +27,4 @@ How to Use:
         git clone git://github.com/okor/AutoPress.git
         cd LEMPress
         bash build
+
