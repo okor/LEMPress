@@ -16,6 +16,7 @@ time=`date +%s`
 # Configs
 
 tmux_config="$PWD/configs/tmux.conf"
+
 fastcgi_init="$PWD/configs/fastcgi-init.sh"
 # cat $tmux_config > /new/path/.tmux.conf
 
@@ -76,12 +77,14 @@ function configure_virtualhost() {
 
 function configure_fastcgi() {
   sudo cp "$fastcgi_init" "/etc/init.d/php-fastcgi"
+  sudo chmod +x "/etc/init.d/php-fastcgi"
 }
 
 
 
 # Start
 function start_servers() {
+  sudo service php-fastcgi start
   sudo service nginx reload
   sudo service nginx start
 }
@@ -111,7 +114,7 @@ install_wordpress
 
 configure_virtualhost
 
+configure_fastcgi
 
-
-# start_servers
+start_servers
 
