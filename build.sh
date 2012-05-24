@@ -10,6 +10,8 @@
 # URL=`ruby $PWD/scripts/get_ip.rb`
 URL="new-wordpress-site.com"
 
+time=`date +%s`
+
 
 # Configs
 
@@ -41,7 +43,7 @@ function install_mysql() {
 }
 
 function install_php() {
-  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-fpm php5-mcrypt php5-mysql
+  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql
 }
 
 function install_varnish() {
@@ -55,20 +57,26 @@ function install_memcached() {
 
 
 function install_wordpress() {
-  time=`date +%s`
   mkdir "$HOME/tmp"
   mkdir "$HOME/sites"
   mkdir "$HOME/sites/$URL/"
   wget -P "$HOME/tmp" http://wordpress.org/latest.zip
   unzip -d "$HOME/tmp/wordpress-$time" "$HOME/tmp/latest.zip"
-  cp -R "$HOME/tmp/wordpress-$time/wordpress/" "$HOME/sites/$URL/"
+  rsync -av --progress "$HOME/tmp/wordpress-$time/wordpress/" "$HOME/sites/$URL/"
   mkdir "$HOME/sites/$URL/logs"
+}
+
+function configure_virtualhost() {
+  sudo sed "s/URL/$URL/g" "/etc/nginx/sites-available/$URL"
+  sudo ln -s "/etc/nginx/sites-available/$URL" "/etc/nginx/sites-enabled/$URL"
+  sudo rm "/etc/nginx/sites-enabled/default"
 }
 
 
 
 function start_servers() {
-  sudo /etc/init.d/nginx start
+  sudo service nginx reload
+  sudo service nginx start
 }
 
 # function copy_configs() {

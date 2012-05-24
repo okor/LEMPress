@@ -24,7 +24,7 @@ Scripting Language
 How to Use:
 ========
         sudo apt-get install openssh-server git-core
-        git clone git://github.com/okor/AutoPress.git
+        git clone git://github.com/okor/LEMPress.git
         cd LEMPress
         bash build
 
