@@ -1,36 +1,30 @@
 #! /bin/bash
 
-# Install ruby
-# function install_ruby() {
-#   yes | sudo apt-get install ruby
-# }
-# install_ruby
-
-# Options
-# URL=`ruby $LEMPress/scripts/get_ip.rb`
+# Change these if you have alternate configuration files
 URL="new-wordpress-site.com"
+tmux_config="$LEMPress/configs/tmux.conf"
+fastcgi_init="$LEMPress/configs/fastcgi-init.sh"
 
-time=`date +%s`
 
 
-# Configs
-
+# Don't change these
+TIME_NOW=`date +%s`
 $LEMPress="$HOME/LEMPress"
 
-tmux_config="$LEMPress/configs/tmux.conf"
 
-fastcgi_init="$LEMPress/configs/fastcgi-init.sh"
-# cat $tmux_config > /new/path/.tmux.conf
 
-# function get_ip() {
-#   wget http://checkip.dyndns.com/ &&
-#   ruby -e ``
-# }
+
+# Upgrade
 
 function upgrade() {
   yes | sudo apt-get update
   yes | sudo apt-get upgrade
 }
+
+
+
+
+# Install
 
 function install_tools() {
   yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip
@@ -75,18 +69,21 @@ function install_wordpress() {
   mkdir "$HOME/sites"
   mkdir "$HOME/sites/$URL/"
   wget -P "$HOME/tmp" http://wordpress.org/latest.zip
-  unzip -d "$HOME/tmp/wordpress-$time" "$HOME/tmp/latest.zip"
-  rsync -av --progress "$HOME/tmp/wordpress-$time/wordpress/" "$HOME/sites/$URL/"
+  unzip -d "$HOME/tmp/wordpress-$TIME_NOW" "$HOME/tmp/latest.zip"
+  rsync -av --progress "$HOME/tmp/wordpress-$TIME_NOW/wordpress/" "$HOME/sites/$URL/"
   mkdir "$HOME/sites/$URL/logs"
 }
 
 
+
+
 # Configure
+
 function configure_virtualhost() {
   sudo cp "$LEMPress/configs/LEMPress-virtualhost.txt" "/etc/nginx/sites-available/$URL"
   sudo sed -i "s/URL/$URL/g" "/etc/nginx/sites-available/$URL"
   sudo ln -s "/etc/nginx/sites-available/$URL" "/etc/nginx/sites-enabled/$URL"
-  # sudo rm "/etc/nginx/sites-enabled/default"
+  sudo rm "/etc/nginx/sites-enabled/default"
 }
 
 function configure_fastcgi() {
@@ -107,16 +104,16 @@ function configure_bash() {
 }
 
 
-# Start
+
+
+
 function start_servers() {
   sudo service php-fastcgi start
   sudo service nginx reload
   sudo service nginx start
 }
 
-# function copy_configs() {
-#   cat $tmux_config
-# }
+
 
 
 
@@ -124,24 +121,26 @@ function start_servers() {
 upgrade
 
 install_tools
-
 install_new_tmux
-
 install_nginx
-
 install_mysql
-
 install_php
-
-# install_varnish
-
-# install_memcached
-
 install_wordpress
 
 configure_virtualhost
-
 configure_fastcgi
+configure_tmux
+configure_bash
 
 start_servers
+
+
+
+
+
+
+
+
+
+
 
