@@ -7,3 +7,5 @@ Need to...
   Set database
   Set prefix
   Set password
+
+  If the script fails, it should be able to be re-run without bonking anything. Currently, It will fail on symlinking. Probably other things.

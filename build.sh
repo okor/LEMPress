@@ -15,7 +15,7 @@ time=`date +%s`
 
 # Configs
 
-$LD="$HOME/LEMPress"
+$LEMPress="$HOME/LEMPress"
 
 tmux_config="$LEMPress/configs/tmux.conf"
 
