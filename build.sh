@@ -70,7 +70,7 @@ function install_mysql() {
 }
 
 function install_php() {
-  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql libssh2-php php5-xcache
+  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql libssh2-php php5-xcache php5-curl php5-memcache php5-tidy
   # php5-dev
   # sudo pecl install apc
 }
