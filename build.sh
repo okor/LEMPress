@@ -70,7 +70,9 @@ function install_mysql() {
 }
 
 function install_php() {
-  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql libssh2-php
+  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql libssh2-php php5-xcache
+  # php5-dev
+  # sudo pecl install apc
 }
 
 
@@ -161,7 +163,10 @@ function configure_wordpress() {
   sed -i "s/put your unique phrase here/$DB_SALT/g" "$HOME/sites/$URL/wp-config.php"
   sed -i "s/wp_/$DB_PREFIX/g" "$HOME/sites/$URL/wp-config.php"
 
-  cp "$LEMPress/configs/wordpress-nginx.conf" "$HOME/sites/$URL/nginx.conf"
+  touch "$HOME/sites/$URL/nginx.conf"
+
+  # Sucks, I know. I'll see what I can do about this.
+  chmod 777 "$HOME/sites/$URL/nginx.conf"
 }
 
 
