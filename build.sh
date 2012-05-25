@@ -109,6 +109,8 @@ function configure_tmux() {
 function configure_bash() {
   cp "$HOME/.bashrc" "$HOME/.bashrc~backup"
   cp "$LEMPress/configs/bashrc" "$HOME/.bashrc"
+  source ~/.bashrc
+  echo "You're in tmux now. Key binding is set to CTRL+q (C-q). To detached from this session, press CTRL+q then d. To log out of the server, just type 'exit' and press enter."
 
   sudo cp /root/.bashrc /root/.bashrc~backup
   sudo cp "$LEMPress/configs/bashrc" /root/.bashrc
