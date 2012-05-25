@@ -14,8 +14,8 @@ LEMPress="$HOME/LEMPress"
 
 
 
-
-URL="new-wordpress-site.com"
+DEFAULT_URL="new-wordpress-site.com"
+URL=""
 
 # Change these if you have alternate configuration files
 TMUX_CONFIG="$LEMPress/configs/tmux.conf"
@@ -23,6 +23,19 @@ FASTCGI_INIT="$LEMPress/configs/fastcgi-init.sh"
 
 
 
+function get_website_url() {
+  echo -n "Enter website URL [DEFAULT:new-wordpress-site.com]: "
+  read USER_URL
+  
+  if [ -z $USER_URL ]
+  then
+    URL=$DEFAULT_URL
+  else
+    URL=$USER_URL
+  fi
+
+  echo "URL set to: $URL"
+}
 
 
 
@@ -134,6 +147,8 @@ function start_servers() {
 
 
 # Do it
+get_website_url
+
 upgrade
 
 install_ruby
@@ -151,10 +166,11 @@ configure_bash
 
 start_servers
 
+
+
+
+
 PUBLIC_IP=`ruby $LEMPress/scripts/get_ip.rb`
-
-
-
 echo -e "\033[32m" && \
 echo -e "\033[32mOk, you're all done. Point your browser at your server (URL: $URL, IP: $PUBLIC_IP) , and you should see a new wordpress site." && \
 echo -e "\033[32m" && \
