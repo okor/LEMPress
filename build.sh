@@ -1,9 +1,9 @@
 #! /bin/bash
 
-# Change these if you have alternate configuration files
-URL="new-wordpress-site.com"
-tmux_config="$LEMPress/configs/tmux.conf"
-fastcgi_init="$LEMPress/configs/fastcgi-init.sh"
+
+
+
+
 
 
 
@@ -14,15 +14,26 @@ LEMPress="$HOME/LEMPress"
 
 
 
+
+URL="new-wordpress-site.com"
+
+# Change these if you have alternate configuration files
+TMUX_CONFIG="$LEMPress/configs/tmux.conf"
+FASTCGI_INIT="$LEMPress/configs/fastcgi-init.sh"
+
+
+
+
+
+
+
+
 # Upgrade
 
 function upgrade() {
   yes | sudo apt-get update
   yes | sudo apt-get upgrade
 }
-
-
-
 
 # Install
 
@@ -87,7 +98,7 @@ function configure_virtualhost() {
 }
 
 function configure_fastcgi() {
-  sudo cp "$fastcgi_init" "/etc/init.d/php-fastcgi"
+  sudo cp "$FASTCGI_INIT" "/etc/init.d/php-fastcgi"
   sudo chmod +x "/etc/init.d/php-fastcgi"
 }
 
