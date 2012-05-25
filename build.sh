@@ -26,14 +26,12 @@ FASTCGI_INIT="$LEMPress/configs/fastcgi-init.sh"
 function get_website_url() {
   echo -n "Enter website URL [DEFAULT:new-wordpress-site.com]: "
   read USER_URL
-  
   if [ -z $USER_URL ]
   then
     URL=$DEFAULT_URL
   else
     URL=$USER_URL
   fi
-
   echo "URL set to: $URL"
 }
 
@@ -132,7 +130,9 @@ function configure_bash() {
   sudo cp "$LEMPress/configs/bashrc" /root/.bashrc
 }
 
-
+function create_db() {
+  ./create_db.sh testdb deployer secretpass
+}
 
 
 
