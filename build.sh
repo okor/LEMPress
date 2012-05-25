@@ -120,6 +120,7 @@ function configure_nginx() {
 function configure_fastcgi() {
   sudo cp "$FASTCGI_INIT" "/etc/init.d/php-fastcgi"
   sudo chmod +x "/etc/init.d/php-fastcgi"
+  sudo update-rc.d php-fastcgi defaults
 }
 
 function configure_tmux() {
