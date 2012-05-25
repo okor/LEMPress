@@ -3,14 +3,15 @@ Need to...
     install mysql WITHOUT ncurses configuration
 
   Required
-    Create mysql user
-    Set password
 
-    Create wp-config.php
-    Set username
-    Set database
-    Set prefix
-    Set password
+    make nginx run under deployer user
+      sudo nano /etc/nginx/nginx.conf
+
+        user www-data;
+        worker_processes  1;
+
+        user deployer;
+        worker_processes  1;
 
     If the script fails, it should be able to be re-run without bonking anything. Currently, It will fail on symlinking and mkdir. Probably other things.
 

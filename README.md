@@ -28,3 +28,4 @@ How to Use:
         cd LEMPress
         bash build.sh
 
+DO NOT RUN THIS SCRIPT AS ROOT

@@ -11,6 +11,7 @@ DB_USER=""
 DB_PASSWORD=""
 DB_SALT=""
 DB_PREFIX=""
+DEFAULT_USER="`whoami`"
 
 
 # Change these if you have alternate configuration files
@@ -69,7 +70,7 @@ function install_mysql() {
 }
 
 function install_php() {
-  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql
+  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql libssh2-php
 }
 
 
@@ -107,6 +108,11 @@ function configure_virtualhost() {
   sudo sed -i "s/URL/$URL/g" "/etc/nginx/sites-available/$URL"
   sudo ln -s "/etc/nginx/sites-available/$URL" "/etc/nginx/sites-enabled/$URL"
   sudo rm "/etc/nginx/sites-enabled/default"
+}
+
+function configure_nginx() {
+  sudo sed -i "s/www-data/$DEFAULT_USER/g" "/etc/nginx/nginx.conf"
+  sudo service nginx restart
 }
 
 function configure_fastcgi() {
@@ -149,17 +155,16 @@ function create_db() {
 
 function configure_wordpress() {
   cp "$HOME/sites/$URL/wp-config-sample.php" "$HOME/sites/$URL/wp-config.php"
-  #db name
   sed -i "s/database_name_here/$DB_NAME/g" "$HOME/sites/$URL/wp-config.php"
-  #db user
   sed -i "s/username_here/$DB_USER/g" "$HOME/sites/$URL/wp-config.php"
-  #db password
   sed -i "s/password_here/$DB_PASSWORD/g" "$HOME/sites/$URL/wp-config.php"
-  #db salt
   sed -i "s/put your unique phrase here/$DB_SALT/g" "$HOME/sites/$URL/wp-config.php"
-  #db prefix
   sed -i "s/wp_/$DB_PREFIX/g" "$HOME/sites/$URL/wp-config.php"
+
+  cp "$LEMPress/configs/wordpress-nginx.conf" "$HOME/sites/$URL/nginx.conf"
 }
+
+
 
 
 
@@ -204,12 +209,12 @@ start_servers
 
 
 PUBLIC_IP=`ruby $LEMPress/scripts/get_ip.rb`
-echo -e "\033[32m" && \
+echo -e "" && \
 echo -e "\033[32mOk, you're all done. Point your browser at your server (URL: $URL, IP: $PUBLIC_IP) , and you should see a new wordpress site." && \
 echo -e "\033[32m" && \
 echo -e "\033[32mHere's some local network information about this machine." && \
 ifconfig | grep "inet addr" && \
-echo -e "\033[32m "
+echo -e ""
 
 
 
