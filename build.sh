@@ -129,10 +129,10 @@ function configure_bash() {
 
 
 function create_passwords() {
-  DB_NAME="pwgen -Bs 10 1"
-  DB_USER="pwgen -Bs 10 1"
-  DB_PASSWORD="pwgen -Bs 40 1"
-  DB_SALT="pwgen -Bs 80 1"
+  DB_NAME="`pwgen -Bs 10 1`"
+  DB_USER="`pwgen -Bs 10 1`"
+  DB_PASSWORD="`pwgen -Bs 40 1`"
+  DB_SALT="`pwgen -Bs 80 1`"
   DB_PREFIX="`pwgen -0 5 1`_"
 }
 
