@@ -1,4 +1,4 @@
-**LEMPress is currently being developed and is not ready for use. If you've stubbled across this repository somehow and your interested in using LEMPress, add it to you watch list and check back regularly for the first stable release.**
+**LEMPress is currently being developed and is not ready for use. If you've stuMbled across this repository somehow and your interested in using LEMPress, add it to you watch list and check back regularly for the first stable release.**
 
 About LEMPress
 =========
@@ -6,7 +6,7 @@ About LEMPress
 
 Strategy
 =====
-  AutoPress strives to get the highest performance possible while keeping stability and security in mind. That's why instead of using the latest PHP build from a PPA or source, it uses good ol' dependable core Ubuntu repos. That also means LEMPress uses fast cgi instead of the faster fpm, again for stability and security. The same goes for Nginx and MySQL versions.
+  LEMPress strives to get the highest performance possible while keeping stability and security in mind. That's why instead of using the latest PHP build from a PPA or source, it uses good ol' dependable core Ubuntu repos. That also means LEMPress uses fast cgi instead of the faster fpm, again for stability and security. The same goes for Nginx and MySQL versions.
 
 About the Stack
 ==========
