@@ -137,7 +137,14 @@ function create_passwords() {
 }
 
 function create_db() {
-  bash "$LEMPress/scripts/create_db.sh $DB_NAME $DB_USER $DB_PASSWORD"
+  MYSQL=`which mysql`
+  Q1="CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+  Q2="GRANT ALL ON *.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';"
+  Q3="FLUSH PRIVILEGES;"
+  SQL="${Q1}${Q2}${Q3}"
+
+  echo "Use the MySQL password you entered earlier." 
+  $MYSQL -uroot -p -e "$SQL"
 }
 
 function configure_wordpress() {
