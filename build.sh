@@ -9,7 +9,7 @@ fastcgi_init="$LEMPress/configs/fastcgi-init.sh"
 
 # Don't change these
 TIME_NOW=`date +%s`
-$LEMPress="$HOME/LEMPress"
+LEMPress="$HOME/LEMPress"
 
 
 
@@ -27,7 +27,7 @@ function upgrade() {
 # Install
 
 function install_tools() {
-  yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip
+  yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip htop
 }
 
 function install_new_tmux() {
