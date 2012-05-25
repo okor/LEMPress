@@ -1,21 +1,17 @@
 #! /bin/bash
 
 
-
-
-
-
-
-
 # Don't change these
 TIME_NOW=`date +%s`
 LEMPress="$HOME/LEMPress"
-
-
-
-
 DEFAULT_URL="new-wordpress-site.com"
 URL=""
+DB_NAME=""
+DB_USER=""
+DB_PASSWORD=""
+DB_SALT=""
+DB_PREFIX=""
+
 
 # Change these if you have alternate configuration files
 TMUX_CONFIG="$LEMPress/configs/tmux.conf"
@@ -49,7 +45,7 @@ function upgrade() {
 # Install
 
 function install_tools() {
-  yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip htop
+  yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip htop pwgen
 }
 
 function install_new_tmux() {
@@ -130,9 +126,35 @@ function configure_bash() {
   sudo cp "$LEMPress/configs/bashrc" /root/.bashrc
 }
 
-function create_db() {
-  ./create_db.sh testdb deployer secretpass
+
+
+function create_passwords() {
+  DB_NAME="pwgen -Bs 10 1"
+  DB_USER="pwgen -Bs 10 1"
+  DB_PASSWORD="pwgen -Bs 40 1"
+  DB_SALT="pwgen -Bs 80 1"
+  DB_PREFIX="`pwgen -0 5 1`_"
 }
+
+function create_db() {
+  bash "$LEMPress/scripts/create_db.sh $DB_NAME $DB_USER $DB_PASSWORD"
+}
+
+function configure_wordpress() {
+  cp "$HOME/sites/$URL/wp-config-sample.php" "$HOME/sites/$URL/wp-config.php"
+  #db name
+  sed -i "s/database_name_here/$DB_NAME/g" "$HOME/sites/$URL/wp-config.php"
+  #db user
+  sed -i "s/username_here/$DB_USER/g" "$HOME/sites/$URL/wp-config.php"
+  #db password
+  sed -i "s/password_here/$DB_PASSWORD/g" "$HOME/sites/$URL/wp-config.php"
+  #db salt
+  sed -i "s/put your unique phrase here/$DB_SALT/g" "$HOME/sites/$URL/wp-config.php"
+  #db prefix
+  sed -i "s/wp_/$DB_PREFIX/g" "$HOME/sites/$URL/wp-config.php"
+}
+
+
 
 
 
@@ -158,6 +180,10 @@ install_nginx
 install_mysql
 install_php
 install_wordpress
+
+create_passwords
+create_db
+configure_wordpress
 
 configure_virtualhost
 configure_fastcgi
