@@ -65,6 +65,11 @@ function install_php() {
   yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql
 }
 
+
+function install_ruby() {
+  yes | sudo apt-get install ruby
+}
+
 # function install_varnish() {
 #   yes | sudo apt-get install varnish
 # }
@@ -109,8 +114,6 @@ function configure_tmux() {
 function configure_bash() {
   cp "$HOME/.bashrc" "$HOME/.bashrc~backup"
   cp "$LEMPress/configs/bashrc" "$HOME/.bashrc"
-  source ~/.bashrc
-  echo "You're in tmux now. Key binding is set to CTRL+q (C-q). To detached from this session, press CTRL+q then d. To log out of the server, just type 'exit' and press enter."
 
   sudo cp /root/.bashrc /root/.bashrc~backup
   sudo cp "$LEMPress/configs/bashrc" /root/.bashrc
@@ -133,6 +136,7 @@ function start_servers() {
 # Do it
 upgrade
 
+install_ruby
 install_tools
 install_new_tmux
 install_nginx
@@ -146,6 +150,17 @@ configure_tmux
 configure_bash
 
 start_servers
+
+PUBLIC_IP=`ruby $LEMPress/scripts/get_ip.rb`
+
+
+
+echo -e "\033[32m" && \
+echo -e "\033[32mOk, you're all done. Point your browser at your server (URL: $URL, IP: $PUBLIC_IP) , and you should see a new wordpress site." && \
+echo -e "\033[32m" && \
+echo -e "\033[32mHere's some local network information about this machine." && \
+ifconfig | grep "inet addr" && \
+echo -e "\033[32m "
 
 
 
