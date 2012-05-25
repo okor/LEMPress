@@ -7,7 +7,7 @@
 # install_ruby
 
 # Options
-# URL=`ruby $PWD/scripts/get_ip.rb`
+# URL=`ruby $LEMPress/scripts/get_ip.rb`
 URL="new-wordpress-site.com"
 
 time=`date +%s`
@@ -15,9 +15,11 @@ time=`date +%s`
 
 # Configs
 
-tmux_config="$PWD/configs/tmux.conf"
+$LD="$HOME/LEMPress"
 
-fastcgi_init="$PWD/configs/fastcgi-init.sh"
+tmux_config="$LEMPress/configs/tmux.conf"
+
+fastcgi_init="$LEMPress/configs/fastcgi-init.sh"
 # cat $tmux_config > /new/path/.tmux.conf
 
 # function get_ip() {
@@ -32,6 +34,18 @@ function upgrade() {
 
 function install_tools() {
   yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip
+}
+
+function install_new_tmux() {
+  yes | sudo apt-get install build-essential debhelper diffstat dpkg-dev fakeroot g++ g++-4.4 html2text intltool-debian libmail-sendmail-perl libncurses5-dev libstdc++6-4.4-dev libsys-hostname-long-perl po-debconf quilt xz-utils libevent-1.4-2 libevent-core-1.4-2 libevent-extra-1.4-2 libevent-dev
+  DOWNLOAD_URL="http://superb-sea2.dl.sourceforge.net/project/tmux/tmux/tmux-1.6/tmux-1.6.tar.gz"
+  wget -P "$HOME/tmp" $DOWNLOAD_URL
+  cd "$HOME/tmp"
+  tar xvvf tmux-1.6.tar.gz
+  cd tmux-1.6/
+  ./configure --prefix=/usr
+  make
+  sudo make install
 }
 
 function install_nginx() {
@@ -69,7 +83,7 @@ function install_wordpress() {
 
 # Configure
 function configure_virtualhost() {
-  sudo cp "$PWD/configs/LEMPress-virtualhost.txt" "/etc/nginx/sites-available/$URL"
+  sudo cp "$LEMPress/configs/LEMPress-virtualhost.txt" "/etc/nginx/sites-available/$URL"
   sudo sed -i "s/URL/$URL/g" "/etc/nginx/sites-available/$URL"
   sudo ln -s "/etc/nginx/sites-available/$URL" "/etc/nginx/sites-enabled/$URL"
   # sudo rm "/etc/nginx/sites-enabled/default"
@@ -80,6 +94,17 @@ function configure_fastcgi() {
   sudo chmod +x "/etc/init.d/php-fastcgi"
 }
 
+function configure_tmux() {
+  cp "$LEMPress/configs/tmux.conf" "$HOME/.tmux.conf"
+}
+
+function configure_bash() {
+  cp "$HOME/.bashrc" "$HOME/.bashrc~backup"
+  cp "$LEMPress/configs/bashrc" "$HOME/.bashrc"
+
+  sudo cp /root/.bashrc /root/.bashrc~backup
+  sudo cp "$LEMPress/configs/bashrc" /root/.bashrc
+}
 
 
 # Start
@@ -99,6 +124,8 @@ function start_servers() {
 upgrade
 
 install_tools
+
+install_new_tmux
 
 install_nginx
 
