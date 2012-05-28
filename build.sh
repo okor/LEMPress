@@ -51,7 +51,7 @@ function install_tools() {
 
 function install_new_tmux() {
   yes | sudo apt-get install build-essential debhelper diffstat dpkg-dev fakeroot g++ g++-4.4 html2text intltool-debian libmail-sendmail-perl libncurses5-dev libstdc++6-4.4-dev libsys-hostname-long-perl po-debconf quilt xz-utils libevent-1.4-2 libevent-core-1.4-2 libevent-extra-1.4-2 libevent-dev
-  DOWNLOAD_URL="http://superb-sea2.dl.sourceforge.net/project/tmux/tmux/tmux-1.6/tmux-1.6.tar.gz"
+  DOWNLOAD_URL="http://sourceforge.net/projects/tmux/files/tmux/tmux-1.6/tmux-1.6.tar.gz"
   wget -P "$HOME/tmp" $DOWNLOAD_URL
   cd "$HOME/tmp"
   tar xvvf tmux-1.6.tar.gz
