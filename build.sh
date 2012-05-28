@@ -183,7 +183,7 @@ function configure_wordpress() {
 function start_servers() {
   sudo service php-fastcgi start
   sudo service memcached start
-  sudo service varnish start
+  sudo service varnish restart
   sudo service nginx reload
   sudo service nginx start
 }
