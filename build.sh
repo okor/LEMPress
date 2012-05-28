@@ -80,14 +80,14 @@ function install_ruby() {
   yes | sudo apt-get install ruby
 }
 
-# function install_varnish() {
-#   yes | sudo apt-get install varnish
-# }
+function install_varnish() {
+  yes | sudo apt-get install varnish
+}
 
-# function install_memcached() {
-#   yes | sudo apt-get install memcached 
-#   # php5-memcache
-# }
+function install_memcached() {
+  yes | sudo apt-get install memcached 
+  # php5-memcache
+}
 
 
 function install_wordpress() {
@@ -135,6 +135,10 @@ function configure_bash() {
   sudo cp "$LEMPress/configs/bashrc" /root/.bashrc
 }
 
+function configure_varnish() {
+  sudo cp "$LEMPress/configs/varnish" "/etc/default/varnish"
+  sudo cp "$LEMPress/configs/default.vcl" "/etc/varnish/default.vcl"
+}
 
 
 function create_passwords() {
@@ -178,6 +182,8 @@ function configure_wordpress() {
 
 function start_servers() {
   sudo service php-fastcgi start
+  sudo service memcached start
+  sudo service varnish start
   sudo service nginx reload
   sudo service nginx start
 }
@@ -198,6 +204,8 @@ install_nginx
 install_mysql
 install_php
 install_wordpress
+install_memcached
+install_varnish
 
 create_passwords
 create_db
@@ -207,6 +215,7 @@ configure_virtualhost
 configure_fastcgi
 configure_tmux
 configure_bash
+configure_varnish
 
 start_servers
 
@@ -220,7 +229,7 @@ echo -e "\033[32mOk, you're all done. Point your browser at your server (URL: $U
 echo -e "\033[32m" && \
 echo -e "\033[32mHere's some local network information about this machine." && \
 ifconfig | grep "inet addr" && \
-echo -e ""
+echo -e "\033[0m"
 
 
 
