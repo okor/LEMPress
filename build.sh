@@ -120,7 +120,7 @@ function install_wordpress() {
 # Configure
 
 function configure_virtualhost() {
-  sudo cp "$LEMPress/configs/LEMPress-virtualhost.txt" "/etc/nginx/sites-available/$URL"
+  sudo rsync "$LEMPress/configs/LEMPress-virtualhost.txt" "/etc/nginx/sites-available/$URL"
   sudo sed -i "s/URL/$URL/g" "/etc/nginx/sites-available/$URL"
   sudo ln -s "/etc/nginx/sites-available/$URL" "/etc/nginx/sites-enabled/$URL"
   sudo rm "/etc/nginx/sites-enabled/default"
@@ -132,26 +132,26 @@ function configure_nginx() {
 }
 
 function configure_fastcgi() {
-  sudo cp "$FASTCGI_INIT" "/etc/init.d/php-fastcgi"
+  sudo rsync "$FASTCGI_INIT" "/etc/init.d/php-fastcgi"
   sudo chmod +x "/etc/init.d/php-fastcgi"
   sudo update-rc.d php-fastcgi defaults
 }
 
 function configure_tmux() {
-  cp "$LEMPress/configs/tmux.conf" "$HOME/.tmux.conf"
+  rsync "$LEMPress/configs/tmux.conf" "$HOME/.tmux.conf"
 }
 
 function configure_bash() {
-  cp "$HOME/.bashrc" "$HOME/.bashrc~backup"
-  cp "$LEMPress/configs/bashrc" "$HOME/.bashrc"
+  rsync "$HOME/.bashrc" "$HOME/.bashrc~backup"
+  rsync "$LEMPress/configs/bashrc" "$HOME/.bashrc"
 
-  sudo cp /root/.bashrc /root/.bashrc~backup
-  sudo cp "$LEMPress/configs/bashrc" /root/.bashrc
+  sudo rsync /root/.bashrc /root/.bashrc~backup
+  sudo rsync "$LEMPress/configs/bashrc" /root/.bashrc
 }
 
 function configure_varnish() {
-  sudo cp "$LEMPress/configs/varnish" "/etc/default/varnish"
-  sudo cp "$LEMPress/configs/default.vcl" "/etc/varnish/default.vcl"
+  sudo rsync "$LEMPress/configs/varnish" "/etc/default/varnish"
+  sudo rsync "$LEMPress/configs/default.vcl" "/etc/varnish/default.vcl"
 }
 
 
@@ -175,7 +175,7 @@ function create_db() {
 }
 
 function configure_wordpress() {
-  cp "$HOME/sites/$URL/wp-config-sample.php" "$HOME/sites/$URL/wp-config.php"
+  rsync "$HOME/sites/$URL/wp-config-sample.php" "$HOME/sites/$URL/wp-config.php"
   sed -i "s/database_name_here/$DB_NAME/g" "$HOME/sites/$URL/wp-config.php"
   sed -i "s/username_here/$DB_USER/g" "$HOME/sites/$URL/wp-config.php"
   sed -i "s/password_here/$DB_PASSWORD/g" "$HOME/sites/$URL/wp-config.php"
