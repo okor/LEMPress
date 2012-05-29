@@ -18,7 +18,18 @@ DEFAULT_USER="deployer"
 TMUX_CONFIG="$LEMPress/configs/tmux.conf"
 FASTCGI_INIT="$LEMPress/configs/fastcgi-init.sh"
 
+#Create LEMPress-specific user
 
+function create_lempress_user_and_login() {
+  echo "Enter username for LEMPress User (Recommended: 'lempress')"
+  read USER_NAME
+  echo "Enter password for LEMPress User"
+  read PASS
+  sudo useradd -d /home/$USER_NAME -m $USER_NAME
+  sudo passwd $PASS
+  su $USER_NAME
+  $PASS
+}
 
 function get_website_url() {
   echo -n "Enter website URL [DEFAULT:new-wordpress-site.com]: "
@@ -200,6 +211,7 @@ if [ "$USER" != "$DEFAULT_USER" ]
 
 
 # Do it
+create_lempress_user_and_login
 get_website_url
 
 upgrade
