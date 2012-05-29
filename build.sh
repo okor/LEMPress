@@ -11,7 +11,7 @@ DB_USER=""
 DB_PASSWORD=""
 DB_SALT=""
 DB_PREFIX=""
-DEFAULT_USER="`whoami`"
+DEFAULT_USER="deployer"
 
 
 # Change these if you have alternate configuration files
@@ -33,7 +33,10 @@ function get_website_url() {
 }
 
 
-
+function create_deployer() {
+  sudo useradd -d /home/deployer -s /bin/bash -G sudo -m deployer
+  sudo passwd deployer
+}
 
 
 # Upgrade
@@ -156,7 +159,7 @@ function create_db() {
   Q3="FLUSH PRIVILEGES;"
   SQL="${Q1}${Q2}${Q3}"
 
-  echo "Use the MySQL password you entered earlier." 
+  echo -e "\033[32m Enter the MySQL password you entered earlier.  \033[0m" 
   $MYSQL -uroot -p -e "$SQL"
 }
 
@@ -189,7 +192,11 @@ function start_servers() {
 }
 
 
-
+if [ "$USER" != "$DEFAULT_USER" ]
+  then 
+    echo -e "\033[32m Set a password for your 'deployer' user. \033[0m"
+    create_deployer
+  fi
 
 
 # Do it
