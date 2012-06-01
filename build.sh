@@ -19,7 +19,7 @@ TMUX_CONFIG="$LEMPress/configs/tmux.conf"
 FASTCGI_INIT="$LEMPress/configs/fastcgi-init.sh"
 
 function get_website_url() {
-  echo -n "Enter website URL [DEFAULT:new-wordpress-site.com]: "
+  echo -ne "\033[32m Enter website URL [DEFAULT:new-wordpress-site.com]: \033[0m"
   read USER_URL
   if [ -z $USER_URL ]
   then
@@ -27,13 +27,7 @@ function get_website_url() {
   else
     URL=$USER_URL
   fi
-  echo "URL set to: $URL"
-}
-
-
-function create_deployer() {
-  sudo useradd -d /home/deployer -s /bin/bash -G sudo -m deployer
-  sudo passwd deployer
+  echo -e "\033[32m URL set to: $URL \033[0m"
 }
 
 
