@@ -10,3 +10,5 @@ Need to...
     - configure nginx to serve images from '/images', 'wp-content/themes/*' and 
 
     - set the hostname, based on the basename of the first url
+
+    - remove "whoopsy" and "popularity contest"
