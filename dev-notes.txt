@@ -5,7 +5,6 @@ Need to...
   Required
 
     - If the script fails, it should be able to be re-run without breaking anything. Currently, It will fail on symlinking and mkdir. Probably other things.
-    - replace all instancess of 'cp' with 'rsync'
 
     - configure nginx to serve images from '/images', 'wp-content/themes/*' and 
 
