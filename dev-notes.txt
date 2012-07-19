@@ -2,10 +2,5 @@ Need to...
 
     - If the script fails, it should be able to be re-run without breaking anything. Currently, It will fail on symlinking and mkdir. Probably other things.
 
-    - disable root SSH login
-
-    * Automatically install WP Total Cache *
-
-    - test with WP comments, see if varnish breaks something.
 
     - create a Wordpress import script, for previously existant WP installs.

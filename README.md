@@ -22,7 +22,12 @@ LEMPress packs a full LEMP stack (Linux/Nginx/MySQL/PHP) in one easy install. Va
 Dependencies
 ============
 
-LEMPress gets the server _ready_ to be make Wordpress fast, but one step that hasn't been automated yet, is configuring a cacheing plugin. Because WordPress is dynamic, a content aware caching plugin is ideal. LEMPress has been tested with WP Total Cache, but other plugins may work. There are lots of articles about how to get WP Total Cache installed and configured. In the future, we'll add some supporting documentation for WP Total Cache.
+LEMPress gets the server _ready_ to make Wordpress fast, but one step that hasn't been automated yet, is configuring a cacheing plugin. Because WordPress is dynamic, a content aware caching plugin is ideal. LEMPress has been tested with WP Total Cache, but other plugins may work. There are lots of articles about how to get WP Total Cache installed and configured. In the future, we'll add some supporting documentation for WP Total Cache.
+
+
+Blog Comments
+=============
+Because LEMPress is taking advantage of cacheing via Varnish, it will break Wordpress comments. The solution is to use Disqus. It's free, it's good, use it.
 
 
 Supported Linux Operating Systems
@@ -30,20 +35,6 @@ Supported Linux Operating Systems
 
 Ubuntu 12.04 LTS x64
 
-
-AutoMagically
-=============
-In addition to just getting a server ready, LEMPress does a few things better than what most server noobs would do.
-
-* Creates completely random, and long passwords for the database
-* Creates completely random table prefixes
-* Actually fills out the salt portion of the WordPress db configuration
-* Sets permissions for WP-Content folder
-* Uses SSH for plugins/WordPress install/upgrade/delete (instead of FTP)
-* Disables root SSH logins
-* Installs/configures iptables firewall
-* Installs/configures denyhosts
-* Installs/configures everything WP Total Cache plugin needs for cacheing with Varnish, Memcache, Xcache and CDN's.
 
 How to Use:
 ========
