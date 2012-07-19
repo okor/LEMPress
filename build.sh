@@ -13,6 +13,12 @@ DB_SALT=""
 DB_PREFIX=""
 DEFAULT_USER="deployer"
 
+if [ "$USER" == "root" ]
+  then 
+    echo -e "\033[32m Don't run this script at root. \033[0m"
+    exit
+  fi
+
 
 # Change these if you have alternate configuration files
 TMUX_CONFIG="$LEMPress/configs/tmux.conf"
@@ -41,7 +47,7 @@ function upgrade() {
 # Install
 
 function install_tools() {
-  yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip htop pwgen
+  yes | sudo apt-get install openssh-server tmux rsync denyhosts iptables wget curl build-essential python-software-properties unzip htop pwgen
 }
 
 function install_new_tmux() {
@@ -184,15 +190,10 @@ function start_servers() {
 }
 
 
-if [ "$USER" != "$DEFAULT_USER" ]
-  then 
-    echo -e "\033[32m Set a password for your 'deployer' user. \033[0m"
-    create_deployer
-  fi
+
 
 
 # Do it
-get_website_url
 
 upgrade
 
@@ -200,11 +201,13 @@ install_ruby
 install_tools
 install_new_tmux
 install_nginx
-install_mysql
 install_php
-install_wordpress
 install_memcached
 install_varnish
+
+install_mysql
+get_website_url
+install_wordpress
 
 create_passwords
 create_db

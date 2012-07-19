@@ -1,14 +1,11 @@
 Need to...
-  Noob friendly
-    install mysql WITHOUT ncurses configuration? Not sure how to do this one.
-
-  Required
 
     - If the script fails, it should be able to be re-run without breaking anything. Currently, It will fail on symlinking and mkdir. Probably other things.
-    - replace all instancess of 'cp' with 'rsync'
 
-    - configure nginx to serve images from '/images', 'wp-content/themes/*' and 
+    - disable root SSH login
 
-    - set the hostname, based on the basename of the first url
+    * Automatically install WP Total Cache *
 
-    - remove "whoopsy" and "popularity contest"
+    - test with WP comments, see if varnish breaks something.
+
+    - create a Wordpress import script, for previously existant WP installs.
