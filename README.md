@@ -1,39 +1,24 @@
-**LEMPress is currently being developed and is not ready for use. If you've stumbled across this repository somehow and your interested in using LEMPress, add it to you watch list and check back regularly for the first stable release.**
-
-
 About LEMPress
-=========
+==============
 
-LEMPress is a super easy to use build script for setting up an optimized WordPress server. The WordPress environment shouldn't be slow or complicated to set up. With LEMPress, it's easy, your site will be ready to take on some beat down traffic.
-
-
-Strategy
-========
-
-LEMPress strives to get the highest performance possible while keeping stability and security in mind. All packages come straight from official Ubuntu repositories, so it's easy to update.
+A WordPress server environment shouldn't be slow or complicated to set up. LEMPress addresses those problems. LEMPress is a super easy to use setup script for creating an optimized WordPress server. LEMPress packs a full LEMP stack (Linux/Nginx/MySQL/PHP) with Varnish and Memcache for caching. With these tools, your site will be prepared for heavy traffic right from the start.  
 
 
-About the Stack
-===============
-
-LEMPress packs a full LEMP stack (Linux/Nginx/MySQL/PHP) in one easy install. Varnish and Memcache are also come bundled. With these tools, your site will be prepared for heavy traffic right out of the gates.
-
-
-Dependencies
+Cacheing
 ============
 
-LEMPress gets the server _ready_ to make Wordpress fast, but one step that hasn't been automated yet, is configuring a cacheing plugin. Because WordPress is dynamic, a content aware caching plugin is ideal. LEMPress has been tested with WP Total Cache, but other plugins may work. There are lots of articles about how to get WP Total Cache installed and configured. In the future, we'll add some supporting documentation for WP Total Cache.
+LEMPress gets the server _ready_ to make Wordpress fast, but one step that hasn't been automated yet, is configuring a caching plugin. Because WordPress is dynamic, a content aware caching plugin is ideal. LEMPress has been tested with WP Total Cache, but other plugins may work. There are lots of articles about how to get WP Total Cache installed and configured. In the future, we'll add some supporting documentation for WP Total Cache.
 
 
 Blog Comments
 =============
-Because LEMPress is taking advantage of cacheing via Varnish, it will break Wordpress comments. The solution is to use Disqus. It's free, it's good, use it.
+Because LEMPress is taking advantage of caching via Varnish, it will break Wordpress comments. The solution is to use Disqus. It's free, it's good, use it.
 
 
-Supported Linux Operating Systems
-=================================
+Distros
+=======
 
-Ubuntu 12.04 LTS x64
+LEMPress expects and has only been tested with Ubuntu 12.04 LTS x64
 
 
 How to Use:
@@ -53,4 +38,12 @@ Download and run the script.
         cd LEMPress
         bash build.sh
 
-The `build.sh` script will guide you though the WordPress and LEMPress stack install. Once you've set up a WordPress cacheing plugin (WP Total Cache is recommended), you'll have a highly optimized WordPress site ready for viral loads.
+The `build.sh` script will guide you though the WordPress and LEMPress stack install. Once you've set up a WordPress caching plugin (WP Total Cache is recommended), you'll have a highly optimized WordPress site ready for viral loads.
+
+
+Need some help?
+===============
+Just hit up @okor on Twitter or submit an issue.
+
+
+

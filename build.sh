@@ -47,7 +47,7 @@ function upgrade() {
 # Install
 
 function install_tools() {
-  yes | sudo apt-get install openssh-server tmux rsync denyhosts iptables wget curl build-essential python-software-properties unzip htop pwgen
+  yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip htop pwgen
 }
 
 function install_new_tmux() {
