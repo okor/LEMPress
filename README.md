@@ -24,21 +24,32 @@ LEMPress expects and has only been tested with Ubuntu 12.04 LTS x64
 How to Use:
 ========
 
-Create the "deployer" user. Make sure to record you deployer password. You'll need it to install plugins and upgrade WordPress
+Create the "deployer" user
 
         sudo useradd -d /home/deployer -s /bin/bash -G sudo -m deployer
         sudo passwd deployer
         su deployer
         cd ~
 
-Download and run the script.
+Install Git
 
         yes | sudo apt-get install git-core
+
+Download LEMPress
+
         git clone git://github.com/okor/LEMPress.git
         cd LEMPress
-        bash build.sh
 
-The `build.sh` script will guide you though the WordPress and LEMPress stack install. Once you've set up a WordPress caching plugin (WP Total Cache is recommended), you'll have a highly optimized WordPress site ready for viral loads.
+Setup the server
+
+        bash build_server.sh
+
+Add a Wordpress site
+
+        bash add_site.sh
+
+
+The `build_server.sh` script will guide you though the WordPress and LEMPress stack install. Once you've set up a WordPress caching plugin (WP Total Cache is recommended), you'll have a highly optimized WordPress site ready for viral loads.
 
 
 Need some help?
