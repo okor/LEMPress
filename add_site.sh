@@ -11,3 +11,5 @@ configure_wordpress
 
 configure_virtualhost
 start_servers
+
+ip_dump

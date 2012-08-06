@@ -178,7 +178,7 @@ function configure_wordpress() {
 function ip_dump() {
   echo -e "" && \
   echo -e "\033[32mOk, you're all done. Point your browser at your server (URL: $URL, IP: $PUBLIC_IP) , and you should see a new wordpress site." && \
-  echo -e "\033[32m" && \
+  echo -e "" && \
   echo -e "\033[32mHere's some local network information about this machine." && \
   ifconfig | grep "inet addr" && \
   echo -e "\033[0m"
