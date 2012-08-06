@@ -1,10 +1,10 @@
 About LEMPress
 ==============
 
-A WordPress server environment shouldn't be slow or complicated to set up. LEMPress addresses those problems. LEMPress is a super easy to use setup script for creating an optimized WordPress server. LEMPress packs a full LEMP stack (Linux/Nginx/MySQL/PHP) with Varnish and Memcache for caching. With these tools, your site will be prepared for heavy traffic right from the start.  
+A WordPress server environment shouldn't be slow or complicated to set up. LEMPress addresses those problems. LEMPress is a super easy to use setup script for creating an optimized WordPress server. LEMPress packs a full LEMP stack (Linux/Nginx/MySQL/PHP) with Varnish and Memcache for caching. With these tools, your site will be prepared for heavy traffic right from the start.
 
 
-Cacheing
+Caching
 ============
 
 LEMPress gets the server _ready_ to make Wordpress fast, but one step that hasn't been automated yet, is configuring a caching plugin. Because WordPress is dynamic, a content aware caching plugin is ideal. LEMPress has been tested with WP Total Cache, but other plugins may work. There are lots of articles about how to get WP Total Cache installed and configured. In the future, we'll add some supporting documentation for WP Total Cache.

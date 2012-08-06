@@ -12,9 +12,10 @@ DB_PASSWORD=""
 DB_SALT=""
 DB_PREFIX=""
 DEFAULT_USER="deployer"
+PUBLIC_IP=`curl -s http://checkip.dyndns.org | awk '{print $6}' | awk -F '<' '{print $1}'`
 
 if [ "$USER" == "root" ]
-  then 
+  then
     echo -e "\033[32m Don't run this script at root. \033[0m"
     exit
   fi
@@ -51,7 +52,11 @@ function install_tools() {
 }
 
 function install_new_tmux() {
-  yes | sudo apt-get install build-essential debhelper diffstat dpkg-dev fakeroot g++ g++-4.4 html2text intltool-debian libmail-sendmail-perl libncurses5-dev libstdc++6-4.4-dev libsys-hostname-long-perl po-debconf quilt xz-utils libevent-1.4-2 libevent-core-1.4-2 libevent-extra-1.4-2 libevent-dev
+  yes | sudo apt-get install build-essential debhelper diffstat dpkg-dev \
+  fakeroot g++ g++-4.4 html2text intltool-debian libmail-sendmail-perl \
+  libncurses5-dev libstdc++6-4.4-dev libsys-hostname-long-perl po-debconf \
+  quilt xz-utils libevent-1.4-2 libevent-core-1.4-2 libevent-extra-1.4-2 libevent-dev
+
   DOWNLOAD_URL="http://sourceforge.net/projects/tmux/files/tmux/tmux-1.6/tmux-1.6.tar.gz"
   wget -P "$HOME/tmp" $DOWNLOAD_URL
   cd "$HOME/tmp"
@@ -71,22 +76,19 @@ function install_mysql() {
 }
 
 function install_php() {
-  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt php5-mysql libssh2-php php5-xcache php5-curl php5-memcache php5-tidy
+  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt \
+  php5-mysql libssh2-php php5-xcache php5-curl php5-memcache php5-tidy
   # php5-dev
   # sudo pecl install apc
 }
 
-
-function install_ruby() {
-  yes | sudo apt-get install ruby
-}
 
 function install_varnish() {
   yes | sudo apt-get install varnish
 }
 
 function install_memcached() {
-  yes | sudo apt-get install memcached 
+  yes | sudo apt-get install memcached
   # php5-memcache
 }
 
@@ -157,7 +159,7 @@ function create_db() {
   Q3="FLUSH PRIVILEGES;"
   SQL="${Q1}${Q2}${Q3}"
 
-  echo -e "\033[32m Enter the MySQL password you entered earlier.  \033[0m" 
+  echo -e "\033[32m Enter the MySQL password you entered earlier.  \033[0m"
   $MYSQL -uroot -p -e "$SQL"
 }
 
@@ -197,7 +199,7 @@ function start_servers() {
 
 upgrade
 
-install_ruby
+
 install_tools
 install_new_tmux
 install_nginx
@@ -225,7 +227,7 @@ start_servers
 
 
 
-PUBLIC_IP=`ruby $LEMPress/scripts/get_ip.rb`
+
 echo -e "" && \
 echo -e "\033[32mOk, you're all done. Point your browser at your server (URL: $URL, IP: $PUBLIC_IP) , and you should see a new wordpress site." && \
 echo -e "\033[32m" && \

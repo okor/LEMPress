@@ -1,6 +1,0 @@
-Need to...
-
-    - If the script fails, it should be able to be re-run without breaking anything. Currently, It will fail on symlinking and mkdir. Probably other things.
-
-
-    - create a Wordpress import script, for previously existant WP installs.
