@@ -1,6 +1,6 @@
 server {
   listen   127.0.0.1:8080;
-  server_name  URL;
+  server_name  URL URL.com;
   root   /home/deployer/sites/URL;
 
   location / {
