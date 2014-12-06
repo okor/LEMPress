@@ -38,18 +38,18 @@ function get_website_url() {
 # Upgrade
 
 function upgrade() {
-  yes | sudo apt-get update
-  yes | sudo apt-get upgrade
+  sudo apt-get -y update
+  sudo apt-get -y --force-yes upgrade
 }
 
 # Install
 
 function install_tools() {
-  yes | sudo apt-get install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip htop pwgen git-core
+  sudo apt-get -y install openssh-server tmux rsync iptables wget curl build-essential python-software-properties unzip htop pwgen git-core
 }
 
 function install_new_tmux() {
-  yes | sudo apt-get install build-essential debhelper diffstat dpkg-dev \
+  sudo apt-get -y install build-essential debhelper diffstat dpkg-dev \
   fakeroot g++ g++-4.4 html2text intltool-debian libmail-sendmail-perl \
   libncurses5-dev libstdc++6-4.4-dev libsys-hostname-long-perl po-debconf \
   quilt xz-utils libevent-1.4-2 libevent-core-1.4-2 libevent-extra-1.4-2 libevent-dev
@@ -65,15 +65,15 @@ function install_new_tmux() {
 }
 
 function install_nginx() {
-  yes | sudo apt-get install nginx
+  sudo apt-get -y install nginx
 }
 
 function install_mysql() {
-  yes | sudo apt-get install mysql-server
+  sudo apt-get -y install mysql-server
 }
 
 function install_php() {
-  yes | sudo apt-get install php5-common php5-cli php5-cgi php5-mcrypt \
+  sudo apt-get -y install php5-common php5-cli php5-cgi php5-mcrypt \
   php5-mysql libssh2-php php5-xcache php5-curl php5-memcache php5-tidy
   # php5-dev
   # sudo pecl install apc
@@ -81,11 +81,11 @@ function install_php() {
 
 
 function install_varnish() {
-  yes | sudo apt-get install varnish
+  sudo apt-get -y install varnish
 }
 
 function install_memcached() {
-  yes | sudo apt-get install memcached
+  sudo apt-get -y install memcached
   # php5-memcache
 }
 
