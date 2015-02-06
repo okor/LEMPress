@@ -15,4 +15,16 @@ server {
     fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
     include fastcgi_params;
   }
+  
+  location = /favicon.ico {
+    log_not_found off;
+    access_log off;
+  }
+
+  location = /robots.txt {
+      allow all;
+      log_not_found off;
+      access_log off;
+  }
+
 }
