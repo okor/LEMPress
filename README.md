@@ -50,11 +50,3 @@ Add a Wordpress site
 
 
 The `build_server.sh` script will guide you though the WordPress and LEMPress stack install. Once you've set up a WordPress caching plugin (WP Total Cache is recommended), you'll have a highly optimized WordPress site ready for viral loads.
-
-
-Need some help?
-===============
-Just hit up @okor on Twitter or submit an issue.
-
-
-
